@@ -10,11 +10,14 @@
         >{{ cat.name }}</span
       > -->
 
-      <a [routerLink]="['/home/' + index]" routerLinkActive="active">{{
-        cat.name
-      }}</a>
+      <a
+        [routerLink]="['/home/' + index]"
+        routerLinkActive="active"
+        [ngClass]="{ 'navigate-active': selectedCatIndex == index }"
+        >{{ cat.name }}</a
+      >
     </div>
-    <div>
+    <div class="addButton">
       <input type="text" [(ngModel)]="newCategory" style="width:80px;" />
       <button (click)="addCategory()" [disabled]="!newCategory">Add</button>
     </div>
@@ -24,14 +27,31 @@
     <div class="header">
       To Do List
     </div>
-    <div *ngFor="let task of tasks; let index = index" class="element">
-      <input type="checkbox" [(ngModel)]="task.isCompleted" />
-      <span [ngClass]="{ strikeText: task.isCompleted }">{{ task.name }}</span>
-
-      <span (click)="deleteTask(index)">delete</span>
+    <div
+      *ngFor="let task of tasks; let index = index"
+      class="element flexContainerForTask"
+    >
+      <div>
+        <input type="checkbox" [(ngModel)]="task.isCompleted" />
+      </div>
+      <div>
+        <span [ngClass]="{ strikeText: task.isCompleted }">{{
+          task.name
+        }}</span>
+      </div>
+      <div>
+        <!-- <span (click)="deleteTask(index)">delete</span> -->
+        <img
+          src="assets/img/delete.png"
+          alt="delete"
+          (click)="deleteTask(index)"
+          class="imageButton"
+          title="delete"
+        />
+      </div>
     </div>
 
-    <div>
+    <div class="addButton">
       <input type="text" [(ngModel)]="newTask" style="width:80px;" />
       <button (click)="addTask()" [disabled]="!newTask">Add</button>
     </div>
