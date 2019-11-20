@@ -1,0 +1,39 @@
+<div class="mainContent">
+  <div class="subLContent">
+    <div class="header">
+      Categoies
+    </div>
+    <div *ngFor="let cat of categories; let index = index" class="element">
+      <!-- <span
+        [ngClass]="{ selectedCat: selectedCatId === cat.Id }"
+        (click)="selectedCatId = cat.Id"
+        >{{ cat.name }}</span
+      > -->
+
+      <a [routerLink]="['/home/' + index]" routerLinkActive="active">{{
+        cat.name
+      }}</a>
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="newCategory" style="width:80px;" />
+      <button (click)="addCategory()" [disabled]="!newCategory">Add</button>
+    </div>
+  </div>
+
+  <div class="subRContent">
+    <div class="header">
+      To Do List
+    </div>
+    <div *ngFor="let task of tasks; let index = index" class="element">
+      <input type="checkbox" [(ngModel)]="task.isCompleted" />
+      <span [ngClass]="{ strikeText: task.isCompleted }">{{ task.name }}</span>
+
+      <span (click)="deleteTask(index)">delete</span>
+    </div>
+
+    <div>
+      <input type="text" [(ngModel)]="newTask" style="width:80px;" />
+      <button (click)="addTask()" [disabled]="!newTask">Add</button>
+    </div>
+  </div>
+</div>
